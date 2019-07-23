@@ -36,8 +36,8 @@ public class TareaEmpresa implements Serializable {
 	@Column(name="esta_id")
 	private Long estaId;
 
-	@Column(name="taem_comentarobligatorio")
-	private byte taemComentarobligatorio;
+	@Column(name="taem_comentarobligatorio") 
+	private Long taemComentarobligatorio;
 
 	@Column(name="taem_diahabilsiguiente")
 	private String taemDiahabilsiguiente;
@@ -126,7 +126,7 @@ public class TareaEmpresa implements Serializable {
 	private String taemPasorevisionEstado;
 
 	@Column(name="taem_recurrente")
-	private byte taemRecurrente;
+	private Long taemRecurrente;
 
 	@Column(name="taem_registradopor")
 	private String taemRegistradopor;

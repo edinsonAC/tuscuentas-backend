@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.backendtuscuentas.entitys.LogActividade;
 import com.backendtuscuentas.entitys.Menu;
 import com.backendtuscuentas.entitys.Usuario;
+import com.backendtuscuentas.entitys.util.Alerta;
 import com.backendtuscuentas.services.IUsuarioService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -132,8 +133,8 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/listarAlertas/{id}")
-	public ResponseEntity<List<LogActividade>> listarAlertasPorIdUsuario(@PathVariable Long id) {
-		return new ResponseEntity<List<LogActividade>>(this.usuarioService.listarAlertasPorIdUsuario(id),
+	public ResponseEntity<ArrayList<Alerta>> listarAlertasPorIdUsuario(@PathVariable Long id) {
+		return new ResponseEntity<ArrayList<Alerta>>(this.usuarioService.listarAlertasPorIdUsuario(id),
 				HttpStatus.OK);
 	}
 }

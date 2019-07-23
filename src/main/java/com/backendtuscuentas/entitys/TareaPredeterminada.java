@@ -3,6 +3,8 @@ package com.backendtuscuentas.entitys;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -25,58 +27,59 @@ public class TareaPredeterminada implements Serializable {
 	private Long taprId;
 
 	@Column(name="tapr_calendariotributario")
-	private byte taprCalendariotributario;
+	private Long taprCalendariotributario;
 
 	@Column(name="tapr_cod")
-	private int taprCod;
+	private Long taprCod;
 
 	@Column(name="tapr_comentarobligatorio")
-	private byte taprComentarobligatorio;
+	private Long taprComentarobligatorio;
 
 	@Column(name="tapr_descripcion")
 	private String taprDescripcion;
 
 	@Column(name="tapr_diahabilsiguiente")
-	private byte taprDiahabilsiguiente;
+	private Long taprDiahabilsiguiente;
 
 	@Column(name="tapr_distrital")
-	private byte taprDistrital;
+	private Long taprDistrital;
 
 	@Column(name="tapr_editable")
-	private byte taprEditable;
+	private Long taprEditable;
 
 	@Column(name="tapr_estado")
-	private byte taprEstado;
+	private Long taprEstado;
 
 	@Column(name="tapr_fecharegistro")
 	private Timestamp taprFecharegistro;
 
 	@Column(name="tapr_impuesto")
-	private byte taprImpuesto;
+	private Long taprImpuesto;
 
 	@Column(name="tapr_nacional")
-	private byte taprNacional;
+	private Long taprNacional;
 
 	@Column(name="tapr_nombre")
 	private String taprNombre;
 
 	@Column(name="tapr_nueva")
-	private byte taprNueva;
+	private Long taprNueva;
 
 	@Column(name="tapr_pidegerente")
 	private String taprPidegerente;
 
 	@Column(name="tapr_recurrente")
-	private byte taprRecurrente;
+	private Long taprRecurrente;
 
 	@Column(name="tapr_registradopor")
 	private String taprRegistradopor;
 
 	@Column(name="tire_id")
-	private int tireId;
+	private Long tireId;
 
 	//bi-directional many-to-one association to TareaEmpresa
-	@OneToMany(mappedBy="tareaPredeterminada")
+	@JsonIgnore
+	@OneToMany(mappedBy="tareaPredeterminada", fetch = FetchType.LAZY)
 	private List<TareaEmpresa> tareaEmpresas;
 
 	//bi-directional many-to-one association to CalendarioFecha
@@ -95,10 +98,12 @@ public class TareaPredeterminada implements Serializable {
 	private Proceso proceso;
 
 	//bi-directional many-to-one association to TareapreActividadpre
+	@JsonIgnore
 	@OneToMany(mappedBy="tareaPredeterminada")
 	private List<TareapreActividadpre> tareapreActividadpres;
 
 	//bi-directional many-to-one association to TipoEmpresaTarea
+	@JsonIgnore
 	@OneToMany(mappedBy="tareaPredeterminada")
 	private List<TipoEmpresaTarea> tipoEmpresaTareas;
 

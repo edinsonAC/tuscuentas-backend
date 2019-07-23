@@ -14,9 +14,9 @@ import com.backendtuscuentas.dao.UsuarioDAO;
 import com.backendtuscuentas.entitys.LogActividade;
 import com.backendtuscuentas.entitys.Menu;
 import com.backendtuscuentas.entitys.Usuario;
+import com.backendtuscuentas.entitys.util.Alerta;
 import com.backendtuscuentas.services.IUsuario;
 import com.backendtuscuentas.services.IUsuarioService;
-
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
@@ -26,7 +26,7 @@ public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
 
 	@Autowired
 	private IMenuDAO menuDao;
-	
+
 	@Autowired
 	private ILogActivadesDAO logDao;
 
@@ -67,9 +67,10 @@ public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
 	@Override
 	public List<Menu> listarFuncionalidadesPorUsuario(Long id) {
 		List<Menu> menus = menuDao.listarMenusPorUsuario(id, id);
-		System.out.println("---------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
+		System.out.println(
+				"---------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>><");
 		if (menus != null) {
-			for (Menu menu : menus) { 
+			for (Menu menu : menus) {
 				menu.setFuncionalidads(funcionalidadDao.listarFuncionalidadesPorMenu(id, menu.getMenuId()));
 			}
 		}
@@ -78,12 +79,18 @@ public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
 	}
 
 	@Override
-	public List<LogActividade> listarAlertasPorIdUsuario(Long idUsuario) {
-		List<LogActividade> alertas = logDao.listarAlertasPorIdUsuario(idUsuario, idUsuario, 3);
-		if(alertas !=null) {
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<==========================================>>>>>>>>>>>>>>>>>>>>>>>>>>><");
-		}
+	public ArrayList<Alerta> listarAlertasPorIdUsuario(Long idUsuario) {
+		ArrayList<Object[]> objetos = new ArrayList<Object[]>();
+		ArrayList<Alerta> alertas = new ArrayList<>();
+		objetos = logDao.listarAlertasPorIdUsuario(idUsuario, idUsuario, 3);
 		
+		if (objetos != null) {
+			for (Object[] object : objetos) {
+				alertas.add(new Alerta((String) object[0].toString() ,new Long((Integer) object[1]), (String) object[2].toString(),
+						(String) object[3], (String) object[4], (String) object[5]));
+			}
+		}
+
 		return alertas;
 	}
 
