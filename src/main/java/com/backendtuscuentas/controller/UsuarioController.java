@@ -33,6 +33,8 @@ import com.backendtuscuentas.entitys.LogActividade;
 import com.backendtuscuentas.entitys.Menu;
 import com.backendtuscuentas.entitys.Usuario;
 import com.backendtuscuentas.entitys.util.Alerta;
+import com.backendtuscuentas.entitys.util.ListadoEjecuciones;
+import com.backendtuscuentas.entitys.util.ListadoEmpresa;
 import com.backendtuscuentas.services.IUsuarioService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -119,7 +121,7 @@ public class UsuarioController {
 			e.printStackTrace();
 		}
 		if (!recurso.exists() && !recurso.isReadable()) {
-			throw new RuntimeException("Error no se puto cargar la imagen");
+			throw new RuntimeException("Error no se pudo cargar la imagen");
 
 		}
 		HttpHeaders cabecera = new HttpHeaders();
@@ -135,6 +137,37 @@ public class UsuarioController {
 	@GetMapping("/listarAlertas/{id}")
 	public ResponseEntity<ArrayList<Alerta>> listarAlertasPorIdUsuario(@PathVariable Long id) {
 		return new ResponseEntity<ArrayList<Alerta>>(this.usuarioService.listarAlertasPorIdUsuario(id),
+				HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/listarAbiertas/{id}/{idEmpresa}")
+	public ResponseEntity<ArrayList<ListadoEjecuciones>> listarEjecucionesAbiertas(@PathVariable Long id,@PathVariable Long idEmpresa) {
+		return new ResponseEntity<ArrayList<ListadoEjecuciones>>(this.usuarioService.listarEjecucionesAbiertas(id, idEmpresa),
+				HttpStatus.OK);
+	}
+	
+	@GetMapping("/listarAtrasadas/{id}/{idEmpresa}")
+	public ResponseEntity<ArrayList<ListadoEjecuciones>> listarEjecucionesAtrasadas(@PathVariable Long id,@PathVariable Long idEmpresa) {
+		return new ResponseEntity<ArrayList<ListadoEjecuciones>>(this.usuarioService.listarEjecucionesAtrasadas(id, idEmpresa),
+				HttpStatus.OK);
+	}
+	
+	@GetMapping("/listarObservadas/{id}/{idEmpresa}")
+	public ResponseEntity<ArrayList<ListadoEjecuciones>> listarEjecucionesObservadas(@PathVariable Long id,@PathVariable Long idEmpresa) {
+		return new ResponseEntity<ArrayList<ListadoEjecuciones>>(this.usuarioService.listarEjecucionesObservadas(id, idEmpresa),
+				HttpStatus.OK);
+	}
+	
+	@GetMapping("/listarCerradas/{id}/{idEmpresa}")
+	public ResponseEntity<ArrayList<ListadoEjecuciones>> listarEjecucionesCerradas(@PathVariable Long id,@PathVariable Long idEmpresa) {
+		return new ResponseEntity<ArrayList<ListadoEjecuciones>>(this.usuarioService.listarEjecucionesCerradas(id, idEmpresa),
+				HttpStatus.OK);
+	}
+	
+	@GetMapping("/listarProximas/{id}/{idEmpresa}")
+	public ResponseEntity<ArrayList<ListadoEjecuciones>> listarEjecucionesProximas(@PathVariable Long id,@PathVariable Long idEmpresa) {
+		return new ResponseEntity<ArrayList<ListadoEjecuciones>>(this.usuarioService.listarEjecucionesProximas(id, idEmpresa),
 				HttpStatus.OK);
 	}
 }
