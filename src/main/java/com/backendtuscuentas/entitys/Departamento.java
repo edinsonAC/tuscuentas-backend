@@ -3,6 +3,8 @@ package com.backendtuscuentas.entitys;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -15,7 +17,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(name="municipio")
+@Table(name="departamento")
 public class Departamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,11 +37,7 @@ public class Departamento implements Serializable {
 
 	@Column(name="depa_registradopor")
 	private String depaRegistradopor;
-
-	//bi-directional many-to-one association to Municipio
-	@OneToMany(mappedBy="departamento")
-	private List<Municipio> municipios;
-
+ 
 	public Departamento() {
 	}
 

@@ -36,14 +36,6 @@ public class TipoDocumento implements Serializable {
 	@Column(name="tido_registradopor")
 	private String tidoRegistradopor;
 
-	//bi-directional many-to-one association to ContadorJuridico
-	@OneToMany(mappedBy="tipoDocumento")
-	private List<ContadorJuridico> contadorJuridicos;
-
-	//bi-directional many-to-one association to Empresa
-	@OneToMany(mappedBy="tipoDocumento")
-	private List<Empresa> empresas;
-
 	public TipoDocumento() {
 	}
 }

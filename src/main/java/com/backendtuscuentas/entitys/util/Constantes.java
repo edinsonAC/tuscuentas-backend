@@ -86,21 +86,15 @@ public class Constantes {
 
 	public static final String OBSERVACION_CARGUE_TAREAS_FINALIZO_ERROR = "El cargue de tareas finalizó con errores,intentelo mas tarde";
 
-	public static final String ID_ADMINTUSCUENTAS = "1";
+	public static final long ID_ADMINTUSCUENTAS = 1;
 
-	public static final String ID_ADMIEMPRESA = "2";
+	public static final long ID_CONTADOR = 3;
 
-	public static final String ID_CONTADOR = "3";
-
-	public static final String ID_INTERVENTOR = "4";
-
-	public static final String ID_SUPERVISOR = "5";
-
-	public static final String ID_ESTANDAR = "6";
+	public static final long ID_ESTANDAR = 6;
 
 	public static final String ID_GERENTE = "7";
 
-	public static final String ID_VENDEDOR = "8";
+	public static final long ID_GERENTE_OPERACIONES= 8;
 
 	public static final String ID_TAREAGENERICA = "1";
 

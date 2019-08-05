@@ -242,4 +242,14 @@ public interface IEjecucionTareaDAO extends JpaRepository<EjecucionTarea, Long> 
 			+ "((ejta_fechainicial BETWEEN NOW() and DATE_SUB(NOW(), INTERVAL -30 DAY)) OR \r\n"
 			+ "(ejta_fechainicial BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW())) ORDER BY ejta.ejta_fechafinal  DESC")
 	public ArrayList<Object[]> listarEjecucionesPendientesPorUsuarioAndEmpresa(long idEmpresa, long idUsuario);
+
+	@Query(nativeQuery = true, value = "SELECT DISTINCT  ejta.ejta_id,ejta.ejta_descripcion,CONCAT_WS(' ', usua.usua_primernombre ,  usua.usua_primerapellido) AS nombre,\r\n"
+			+ "DATE_FORMAT(ejta.ejta_fechafinalizada, '%Y/%m/%d  %H:%i:%s') as fechaFinalizada, \r\n"
+			+ " usua.usua_imgperfil FROM ejecucion_tarea ejta\r\n"
+			+ " INNER JOIN usuario usua ON ejta.usua_id = usua.usua_id\r\n"
+			+ " INNER JOIN actividad_predeterminada acpr ON acpr.acpr_id = ejta.acpr_id\r\n"
+			+ " WHERE ejta_codejecucion = (SELECT ejta_codejecucion  FROM ejecucion_tarea WHERE ejta_id= ?1)\r\n"
+			+ " AND taem_id = (SELECT taem_id  FROM ejecucion_tarea WHERE ejta_id= ?2)")
+	public ArrayList<Object[]> listarPasosPorEjecucion(long idEjecucion, long idEjecucion2);
+
 }

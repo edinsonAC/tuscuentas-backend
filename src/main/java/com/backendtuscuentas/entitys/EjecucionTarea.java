@@ -3,11 +3,13 @@ package com.backendtuscuentas.entitys;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.backendtuscuentas.entitys.util.Paso;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -86,12 +88,10 @@ public class EjecucionTarea implements Serializable {
 	private Usuario usuaId;
 
 	//bi-directional many-to-one association to ChecklistActividadempresa
-	@JsonIgnore
 	@OneToMany(mappedBy="ejecucionTarea", fetch = FetchType.LAZY)
 	private List<ChecklistActividadempresa> checklistActividadempresas;
 
 	//bi-directional many-to-one association to ComentariosTarea
-	@JsonIgnore
 	@OneToMany(mappedBy="ejecucionTarea", fetch = FetchType.LAZY)
 	private List<ComentariosTarea> comentariosTareas;
 
@@ -115,6 +115,12 @@ public class EjecucionTarea implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="ejecucionTarea", fetch = FetchType.LAZY)
 	private List<Visualizar> visualizars;
+	
+	@Transient
+	private List<Checklist> checklist;
+	
+	@Transient
+	private ArrayList<Paso> pasos;
 
 	public EjecucionTarea() {
 	}

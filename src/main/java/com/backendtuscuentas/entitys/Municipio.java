@@ -36,17 +36,8 @@ public class Municipio implements Serializable {
 	@Column(name="muni_orden")
 	private String muniOrden;
 
-	@Column(name="muni_registradopor")
+	@Column(name="muni_registradopor") 
 	private String muniRegistradopor;
-
-	//bi-directional many-to-one association to ContadorJuridico
-	@OneToMany(mappedBy="municipio")
-	private List<ContadorJuridico> contadorJuridicos;
-
-	//bi-directional many-to-one association to Departamento
-	@ManyToOne
-	@JoinColumn(name="depa_id")
-	private Departamento departamento;
 
 	public Municipio() {
 	}

@@ -10,13 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.backendtuscuentas.dao.IDepartamentoDAO;
 import com.backendtuscuentas.dao.IEjecucionTareaDAO;
 import com.backendtuscuentas.dao.IEmpresaDAO;
 import com.backendtuscuentas.dao.IFuncionalidadDAO;
 import com.backendtuscuentas.dao.ILogActivadesDAO;
 import com.backendtuscuentas.dao.IMenuDAO;
+import com.backendtuscuentas.dao.IMunicipioDAO;
+import com.backendtuscuentas.dao.ITipoDocumentoDAO;
+import com.backendtuscuentas.dao.ITipoUsuarioDAO;
 import com.backendtuscuentas.dao.UsuarioDAO;
+import com.backendtuscuentas.entitys.Departamento;
 import com.backendtuscuentas.entitys.Menu;
+import com.backendtuscuentas.entitys.Municipio;
+import com.backendtuscuentas.entitys.TipoDocumento;
+import com.backendtuscuentas.entitys.TipoUsuario;
 import com.backendtuscuentas.entitys.Usuario;
 import com.backendtuscuentas.entitys.util.Alerta;
 import com.backendtuscuentas.entitys.util.Constantes;
@@ -44,7 +52,19 @@ public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
 	private IEjecucionTareaDAO ejecucionTareaDao;
 
 	@Autowired
+	private ITipoDocumentoDAO tipoDocumentoDao;
+
+	@Autowired
 	private IEmpresaDAO empresaDao;
+
+	@Autowired
+	private ITipoUsuarioDAO tipoUsuarioDAO;
+
+	@Autowired
+	private IDepartamentoDAO departamentoDao;
+
+	@Autowired
+	private IMunicipioDAO municipioDao;
 
 	@Transactional(readOnly = true)
 	@Override
@@ -261,6 +281,33 @@ public class UsuarioServiceImpl implements IUsuarioService, IUsuario {
 		}
 
 		return tareasCerradas;
+	}
+
+	@Override
+	public List<TipoDocumento> listarTipoDocumento() {
+		// TODO Auto-generated method stub
+		return tipoDocumentoDao.findAll();
+	}
+
+	@Override
+	public List<TipoUsuario> listarTipoUsuario(Long tipoUsuario) {
+		List<TipoUsuario> tiposUsuario;
+		if (tipoUsuario == Constantes.ID_CONTADOR) {
+			tiposUsuario = tipoUsuarioDAO.listarTipoUsuarioContador();
+		} else {
+			tiposUsuario = tipoUsuarioDAO.findAll();
+		}
+		return tiposUsuario;
+	}
+
+	@Override
+	public List<Departamento> listarDepartamentos() {
+		return departamentoDao.findAll();
+	}
+
+	@Override
+	public List<Municipio> listarMunicipioPorDepartamento(Long idDepartamento) {
+		return municipioDao.listarMunicipioPorDepartamento(idDepartamento);
 	}
 
 }
